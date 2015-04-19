@@ -1,6 +1,6 @@
 # Replr
 
-Quick and dirty vimscript plugin for tightening REPLs.
+Quick and dirty Vim plugin for tightening REPLs.
 
 Calling with `:Replr`, will try and find the first file called `build.bat` (or `build.sh` on Unix) and execute it, located as a sibling or in any of the parent directories of the `cwd`.
 
