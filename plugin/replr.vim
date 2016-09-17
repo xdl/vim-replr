@@ -23,10 +23,17 @@ function! s:Replr()
 
 	while i >= 0
 		let dir_of_repl = join(path_fragments[0:i], delimiter)
+        if has("unix")
+            let dir_of_repl = "/" . dir_of_repl
+        endif
 		let build_script = get(g:replr_build_instructions, dir_of_repl, default_build)
 		if filereadable(join([dir_of_repl, build_script], delimiter))
 			let found = 1
-			execute "!pushd " . dir_of_repl . " && " . build_script . " && popd"
+            if has("unix")
+                execute "!pushd " . dir_of_repl . " && " . "./" . build_script . " && popd"
+            else
+                execute "!pushd " . dir_of_repl . " && " . build_script . " && popd"
+            end
 			break
 		endif
 		let i -= 1
